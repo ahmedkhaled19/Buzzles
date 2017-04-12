@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Buzzles</string>
+    <string name="facebook_app_id">110035052825537</string>
+    <string name="snakeBarsplash">No Internet Connection</string>
+    <string name="spinner_prompt">Choose your Job</string>
+    <string-array name="job_title">
+        <item>Graphic Designer</item>
+        <item>Graphic Artist</item>
+        <item>Logo Designer</item>
+        <item>UI Designer</item>
+        <item>UX Designer</item>
+        <item>Photographer</item>
+        <item>Game Designer</item>
+        <item>Art Designer</item>
+        <item>Art Director</item>
+        <item>Art Layout Designer</item>
+        <item>Web Designer</item>
+        <item>Motion Designer</item>
+        <item>2D Animator</item>
+        <item>2D Animation Artist</item>
+        <item>3D Animator</item>
+        <item>3D Animation Artist</item>
+        <item>Illustrator Artist</item>
+        <item>Storyboard Artist</item>
+        <item>Animated Cartoon Artist</item>
+        <item>Background Artist</item>
+        <item>Interaction Designer</item>
+        <item>Calligraphic Artist</item>
+        <item>Cartoon Film Artist</item>
+        <item>Cartoonist Sketch</item>
+        <item>Cartoonist</item>
+        <item>Digital Animator/Artist</item>
+        <item>Advertising Artist</item>
+        <item>Advertising Illustrator</item>
+        <item>Advertising Designer</item>
+        <item>Advertising Layout Designer</item>
+        <item>Poster Artist</item>
+        <item>Layout Designer/Artist</item>
+        <item>Catalogue Illustrator</item>
+        <item>Fashion Illustrator</item>
+        <item>Newspaper Illustrator</item>
+        <item>Commercial Designer</item>
+        <item>Communication Designer</item>
+        <item>Flash Designer</item>
+        <item>Package Designer</item>
+        <item>Page Designer</item>
+        <item>Wallpaper Designer</item>
+        <item>Caricaturist</item>
+        <item>Calligrapher</item>
+
+    </string-array>
+
+
+</resources>

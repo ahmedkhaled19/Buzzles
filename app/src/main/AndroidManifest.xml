@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.ahmedkhaled.buzzels">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".Utils.AppController"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SignUp.SignUpActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.ahmedkhaled.buzzels.Login.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".WishlistFragment.WishlistActivity"
+            android:parentActivityName=".Profile.Profile"
+            android:theme="@style/WishListTheme">
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Profile.Profile" />
+        </activity>
+        <activity android:name=".Login.LoginActivity" />
+        <activity android:name=".PicFragment" />
+        <activity android:name=".SoundFragment" />
+        <activity android:name=".VidFragment" />
+        <activity android:name=".Material.MaterialActivity" />
+        <activity android:name=".SubCategory.SubCategory"></activity>
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            tools:replace="android:theme"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" />
+
+    </application>
+
+</manifest>

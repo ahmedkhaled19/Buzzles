@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.ahmedkhaled.buzzels.SplashActivity">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:pv="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#2E2E2E"
+        tools:context="com.example.ahmedkhaled.buzzels.SplashActivity">
+
+        <me.wangyuwei.particleview.ParticleView
+            android:id="@+id/animation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            pv:pv_background_color="#2E2E2E"
+            pv:pv_host_text="Buzzles"
+            pv:pv_host_text_anim_time="1000"
+            pv:pv_host_text_size="65sp"
+            pv:pv_particle_text=".org"
+            pv:pv_particle_text_size="42sp"
+            pv:pv_spread_anim_time="1000"
+            pv:pv_text_anim_time="1000"
+            pv:pv_text_color="#FFF" />
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
