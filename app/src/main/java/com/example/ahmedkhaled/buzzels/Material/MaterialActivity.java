@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import com.example.ahmedkhaled.buzzels.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MaterialActivity extends AppCompatActivity implements MaterialView {
 
@@ -24,14 +25,14 @@ public class MaterialActivity extends AppCompatActivity implements MaterialView 
         setContentView(R.layout.activity_material);
         recyclerView = (RecyclerView) findViewById(R.id.matrial_view);
         intent = getIntent();
-        presenter = new MaterialPresenter(this, new MaterialModel());
-        presenter.GetData(intent.getStringExtra("id"), intent.getIntExtra("from",0));
+        presenter = new MaterialPresenter(this, new MaterialModel(), intent.getStringExtra("id"), intent.getIntExtra("from", 0));
+        presenter.GetData();
     }
 
     @Override
-    public void putdata(ArrayList<material_object> data) {
-        adapter = new CustRecyclerAdapter(getApplicationContext(), data);
-        manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+    public void putdata(List<MaterialObject> data) {
+        adapter = new CustRecyclerAdapter(getApplicationContext(), data, presenter);
+        manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
     }

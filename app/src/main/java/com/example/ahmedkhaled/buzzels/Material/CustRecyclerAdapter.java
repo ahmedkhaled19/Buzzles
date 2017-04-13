@@ -1,6 +1,8 @@
 package com.example.ahmedkhaled.buzzels.Material;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,18 +15,22 @@ import com.example.ahmedkhaled.buzzels.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by AhmedKhaled on 3/21/2017.
  */
 
 public class CustRecyclerAdapter extends RecyclerView.Adapter<CustRecyclerAdapter.Holder> {
-    private Context context;
-    private ArrayList<material_object> material_list;
 
-    public CustRecyclerAdapter(Context context, ArrayList<material_object> material_list) {
+    private Context context;
+    private List<MaterialObject> material_list;
+    private MaterialPresenter presenter;
+
+    public CustRecyclerAdapter(Context context, List<MaterialObject> material_list, MaterialPresenter presenter) {
         this.context = context;
         this.material_list = material_list;
+        this.presenter = presenter;
     }
 
     @Override
@@ -34,10 +40,9 @@ public class CustRecyclerAdapter extends RecyclerView.Adapter<CustRecyclerAdapte
     }
 
     @Override
-    public void onBindViewHolder(Holder holder, int position) {
-        material_object obj = material_list.get(position);
+    public void onBindViewHolder(final Holder holder, final int position) {
+        MaterialObject obj = material_list.get(position);
 
-        holder.price.setText(obj.getPrice());
         holder.title.setText(obj.getName());
         if (obj.is_liked()) {
             holder.like.setImageResource(R.drawable.liked);
@@ -52,6 +57,13 @@ public class CustRecyclerAdapter extends RecyclerView.Adapter<CustRecyclerAdapte
         holder.share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+               /* String shareBody = "Created By Buzzles.org";
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, material_list.get(position).getName());
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                sharingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(Intent.createChooser(sharingIntent, "visit us"));*/
                 Toast.makeText(context, "share", Toast.LENGTH_SHORT).show();
             }
         });
@@ -65,11 +77,12 @@ public class CustRecyclerAdapter extends RecyclerView.Adapter<CustRecyclerAdapte
         holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "like", Toast.LENGTH_SHORT).show();
-
+                Boolean aBoolean = presenter.Like(material_list.get(position).getId());
+                if (aBoolean) {
+                    holder.like.setImageResource(R.drawable.liked);
+                }
             }
         });
-
         Picasso.with(context).load(obj.getImg_url()).into(holder.item_image);
     }
 
@@ -80,7 +93,7 @@ public class CustRecyclerAdapter extends RecyclerView.Adapter<CustRecyclerAdapte
 
     public class Holder extends RecyclerView.ViewHolder {
         ImageView item_image, like, share, wish;
-        TextView title, price;
+        TextView title;
 
         public Holder(View itemView) {
             super(itemView);
@@ -89,7 +102,6 @@ public class CustRecyclerAdapter extends RecyclerView.Adapter<CustRecyclerAdapte
             share = (ImageView) itemView.findViewById(R.id.share_icon);
             wish = (ImageView) itemView.findViewById(R.id.wishlist_icon);
             title = (TextView) itemView.findViewById(R.id.item_title);
-            price = (TextView) itemView.findViewById(R.id.item_price);
         }
     }
 }

@@ -1,20 +1,32 @@
 package com.example.ahmedkhaled.buzzels.Material;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by AhmedKhaled on 3/21/2017.
  */
 
-public class material_object {
+public class MaterialObject {
+
+    @SerializedName("id")
+    private String id;
+
+    @SerializedName("photo")
     private String img_url;
+
+    @SerializedName("name")
     private String name;
-    private String price;
+
+    @SerializedName("is_liked")
     private boolean is_liked;
+
+    @SerializedName("is_wished-")
     private boolean is_wishlisted;
 
-    public material_object(String img_url, String name, String price, boolean is_liked, boolean is_wishlisted) {
+    public MaterialObject(String img_url, String name, String id, boolean is_liked, boolean is_wishlisted) {
         this.img_url = img_url;
         this.name = name;
-        this.price = price;
+        this.id = id;
         this.is_liked = is_liked;
         this.is_wishlisted = is_wishlisted;
     }
@@ -27,8 +39,8 @@ public class material_object {
         return name;
     }
 
-    public String getPrice() {
-        return price;
+    public String getId() {
+        return id;
     }
 
     public boolean is_liked() {

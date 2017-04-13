@@ -2,39 +2,31 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="364dp"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/activity_horizontal_margin"
     android:orientation="vertical"
-    app:cardCornerRadius="2dp"
+    app:cardCornerRadius="3dp"
     app:cardElevation="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp">
 
             <TextView
                 android:id="@+id/item_title"
-                android:layout_margin="4dp"
-                android:textAllCaps="true"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:typeface="monospace" />
-
-            <TextView
-                android:id="@+id/item_price"
-                android:textColor="#4caf50"
                 android:layout_margin="4dp"
+                android:fontFamily="monospace"
                 android:textAllCaps="true"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textStyle="bold|italic"
                 android:typeface="monospace" />
         </RelativeLayout>
 
@@ -42,34 +34,36 @@
 
             android:id="@+id/item_img"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:elevation="4dp" />
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            android:scaleType="fitXY" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
             android:orientation="horizontal">
 
             <ImageView
-                android:src="@drawable/liked"
                 android:id="@+id/like_icon"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:src="@drawable/liked" />
 
             <ImageView
-                android:src="@drawable/wish"
                 android:id="@+id/wishlist_icon"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:src="@drawable/wish" />
 
             <ImageView
-                android:src="@drawable/share"
                 android:id="@+id/share_icon"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:src="@drawable/share" />
         </LinearLayout>
     </LinearLayout>
 

@@ -15,6 +15,6 @@ public class URLs {
     public static final String UnWishList = ROOT_URL + "material/removeFromWishlist/";
     public static final String AddToWishlist = ROOT_URL + "material/addToWishlish/";
     public static final String Like = ROOT_URL + "material/like/";
-    public static final String Unlike = ROOT_URL + "material/unlike/get?";
+    public static final String Unlike = ROOT_URL + "material/unlike/";
 
 }
