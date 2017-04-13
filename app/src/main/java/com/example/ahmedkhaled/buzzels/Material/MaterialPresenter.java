@@ -55,11 +55,12 @@ public class MaterialPresenter {
                     @Override
                     public void accept(List<MaterialObject> Data) {
                         view.putdata(Data);
+
                     }
                 });
     }
 
-    protected Boolean Like(String id) {
+    protected boolean Like(String id) {
         final boolean[] flag = {false};
         Observable<String> Like = model.Like(id);
         Like.observeOn(Schedulers.computation())
@@ -88,18 +89,86 @@ public class MaterialPresenter {
     }
 
     protected Boolean Unlike(String id) {
-        return false;
+        final boolean[] flag = {false};
+        Observable<String> Like = model.UnLike(id);
+        Like.observeOn(Schedulers.computation())
+                .map(new Function<String, Boolean>() {
+                    @Override
+                    public Boolean apply(String respose) throws Exception {
+                        JSONObject object = new JSONObject(respose);
+                        String statue = object.getString("status");
+                        if (statue.equals("false")) {
+                            return false;
 
+                        } else {
+                            return true;
+                        }
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean flage) throws Exception {
+                        Log.d("ahmeddd", String.valueOf(flage));
+                        flag[0] = flage;
+                    }
+                });
+        return flag[0];
     }
 
-    protected Boolean Wish(String id) {
-        return false;
+    protected boolean Wish(String id) {
+        final boolean[] flag = {false};
+        Observable<String> Like = model.Wish(id);
+        Like.observeOn(Schedulers.computation())
+                .map(new Function<String, Boolean>() {
+                    @Override
+                    public Boolean apply(String respose) throws Exception {
+                        JSONObject object = new JSONObject(respose);
+                        String statue = object.getString("status");
+                        if (statue.equals("false")) {
+                            return false;
 
+                        } else {
+                            return true;
+                        }
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean flage) throws Exception {
+                        flag[0] = flage;
+                    }
+                });
+        return flag[0];
     }
 
-    protected Boolean Ubwish(String id) {
-        return false;
+    protected Boolean Unwish(String id) {
+        final boolean[] flag = {false};
+        Observable<String> Like = model.UnWishlist(id);
+        Like.observeOn(Schedulers.computation())
+                .map(new Function<String, Boolean>() {
+                    @Override
+                    public Boolean apply(String respose) throws Exception {
+                        JSONObject object = new JSONObject(respose);
+                        String statue = object.getString("status");
+                        if (statue.equals("false")) {
+                            return false;
 
+                        } else {
+                            return true;
+                        }
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean flage) throws Exception {
+                        Log.d("ahmeddd", String.valueOf(flage));
+                        flag[0] = flage;
+                    }
+                });
+        return flag[0];
     }
 
 }

@@ -1,5 +1,7 @@
 package com.example.ahmedkhaled.buzzels.Material;
 
+import android.util.Log;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -20,7 +22,7 @@ public class MaterialObject {
     @SerializedName("is_liked")
     private boolean is_liked;
 
-    @SerializedName("is_wished-")
+    @SerializedName("is_wished")
     private boolean is_wishlisted;
 
     public MaterialObject(String img_url, String name, String id, boolean is_liked, boolean is_wishlisted) {
@@ -49,5 +51,13 @@ public class MaterialObject {
 
     public boolean is_wishlisted() {
         return is_wishlisted;
+    }
+
+    public void set_liked(boolean is_liked) {
+        this.is_liked = is_liked;
+    }
+
+    public void set_wishlisted(boolean is_wishlisted) {
+        this.is_wishlisted = is_wishlisted;
     }
 }

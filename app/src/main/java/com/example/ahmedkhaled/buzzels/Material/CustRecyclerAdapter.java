@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
 
 /**
  * Created by AhmedKhaled on 3/21/2017.
@@ -44,46 +47,74 @@ public class CustRecyclerAdapter extends RecyclerView.Adapter<CustRecyclerAdapte
         MaterialObject obj = material_list.get(position);
 
         holder.title.setText(obj.getName());
+
         if (obj.is_liked()) {
             holder.like.setImageResource(R.drawable.liked);
         } else {
             holder.like.setImageResource(R.drawable.unlike);
         }
+
         if (obj.is_wishlisted()) {
             holder.wish.setImageResource(R.drawable.wish);
         } else {
             holder.wish.setImageResource(R.drawable.unwish);
         }
+
         holder.share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* String shareBody = "Created By Buzzles.org";
+                String shareBody = "is created By Buzzles.org";
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
-                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, material_list.get(position).getName());
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, material_list.get(position).getName() + shareBody);
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
                 sharingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(Intent.createChooser(sharingIntent, "visit us"));*/
-                Toast.makeText(context, "share", Toast.LENGTH_SHORT).show();
+                context.startActivity(sharingIntent);
             }
         });
+
         holder.wish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "wish", Toast.LENGTH_SHORT).show();
+                if (material_list.get(position).is_wishlisted()) {
+                    boolean aBoolean = presenter.Unwish(material_list.get(position).getId());
+                    material_list.get(position).set_wishlisted(false);
+                    holder.wish.setImageResource(R.drawable.unwish);
+                    Toast.makeText(context, "UnWish", Toast.LENGTH_SHORT).show();
+                } else {
+                    boolean aBoolean = presenter.Wish(material_list.get(position).getId());
+                    material_list.get(position).set_wishlisted(true);
+                    holder.wish.setImageResource(R.drawable.wish);
+                    Toast.makeText(context, "Wish", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
-        holder.like.setOnClickListener(new View.OnClickListener() {
+
+        holder.like.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view) {
-                Boolean aBoolean = presenter.Like(material_list.get(position).getId());
-                if (aBoolean) {
+                if (material_list.get(position).is_liked()) {
+                    boolean aBoolean = presenter.Unlike(material_list.get(position).getId());
+                    holder.like.setImageResource(R.drawable.unlike);
+                    material_list.get(position).set_liked(false);
+                    Toast.makeText(context, "Unlike", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    boolean aBoolean = presenter.Like(material_list.get(position).getId());
                     holder.like.setImageResource(R.drawable.liked);
+                    material_list.get(position).set_liked(true);
+                    Toast.makeText(context, "Like", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
-        Picasso.with(context).load(obj.getImg_url()).into(holder.item_image);
+        Picasso.with(context).
+
+                load(obj.getImg_url()).
+
+                into(holder.item_image);
     }
 
     @Override

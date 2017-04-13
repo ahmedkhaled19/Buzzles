@@ -66,12 +66,13 @@ public class MaterialModel {
         return Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(final ObservableEmitter<String> emitter) throws Exception {
+                String URL_Like = URLs.Like + id;
                 StringRequest stringRequest =
-                        new StringRequest(Request.Method.POST, URLs.Like,
+                        new StringRequest(Request.Method.POST, URL_Like,
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
-                                        Log.d("ahmeddd",response);
+                                        Log.d("ahmeddd", response);
                                         emitter.onNext(response);
                                     }
                                 },
@@ -83,7 +84,6 @@ public class MaterialModel {
                             @Override
                             protected Map<String, String> getParams() throws AuthFailureError {
                                 Map<String, String> params = new HashMap<>();
-                                params.put("material_id", id);
                                 params.put("token", AppController.getInstance().UserKey());
                                 return params;
                             }
@@ -97,8 +97,9 @@ public class MaterialModel {
         return Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(final ObservableEmitter<String> emitter) throws Exception {
+                String URL_UNLike = URLs.Unlike + id;
                 StringRequest stringRequest =
-                        new StringRequest(Request.Method.POST, URLs.Unlike,
+                        new StringRequest(Request.Method.POST, URL_UNLike,
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
@@ -127,8 +128,9 @@ public class MaterialModel {
         return Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(final ObservableEmitter<String> emitter) throws Exception {
+                String URL_Wish = URLs.AddToWishlist + id;
                 StringRequest stringRequest =
-                        new StringRequest(Request.Method.POST, URLs.AddToWishlist,
+                        new StringRequest(Request.Method.POST, URL_Wish,
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
@@ -157,8 +159,9 @@ public class MaterialModel {
         return Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(final ObservableEmitter<String> emitter) throws Exception {
+                String URL_UNWish = URLs.UnWishList + id;
                 StringRequest stringRequest =
-                        new StringRequest(Request.Method.POST, URLs.UnWishList,
+                        new StringRequest(Request.Method.POST, URL_UNWish,
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
