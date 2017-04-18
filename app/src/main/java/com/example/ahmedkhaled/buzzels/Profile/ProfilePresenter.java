@@ -68,6 +68,7 @@ public class ProfilePresenter {
     }
 
     public void LogOut() {
+        model.LogOut();
         AppController.getInstance().logout();
         view.LogOut();
     }

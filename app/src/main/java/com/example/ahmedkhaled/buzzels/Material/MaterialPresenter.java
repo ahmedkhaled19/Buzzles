@@ -154,7 +154,6 @@ public class MaterialPresenter {
                         String statue = object.getString("status");
                         if (statue.equals("false")) {
                             return false;
-
                         } else {
                             return true;
                         }

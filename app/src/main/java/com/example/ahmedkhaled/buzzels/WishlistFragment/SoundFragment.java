@@ -13,12 +13,12 @@ import com.example.ahmedkhaled.buzzels.R;
  * Created by seif on 3/19/2017.
  */
 public class SoundFragment extends android.support.v4.app.Fragment {
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view ;
-        view = inflater.inflate(R.layout.activity_sound , container ,false);
-
-        return view ;
+        final View view;
+        view = inflater.inflate(R.layout.activity_sound, container, false);
+        return view;
     }
 }

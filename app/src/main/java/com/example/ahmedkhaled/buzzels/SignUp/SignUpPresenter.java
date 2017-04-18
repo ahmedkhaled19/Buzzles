@@ -13,6 +13,8 @@ import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static android.R.attr.button;
 import static com.android.volley.VolleyLog.TAG;
@@ -36,6 +38,11 @@ public class SignUpPresenter implements SignUpModel.VolleyCallback {
         fullname = view.getFullname();
         dob = view.getDate();
         mail = view.getEmail();
+        boolean flag = CheckMail(mail);
+        if (!flag) {
+            view.ErrorMessage("Invalid email");
+            return;
+        }
         gender = view.getGender();
         password = view.getPassword();
         cp = view.getCpassword();
@@ -60,6 +67,26 @@ public class SignUpPresenter implements SignUpModel.VolleyCallback {
             view.errorinpasword();
             return;
         }
+    }
+
+    private boolean CheckMail(String mail) {
+        String regExpn =
+                "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                        + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                        + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                        + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
+
+        CharSequence inputStr = mail;
+        Pattern pattern = Pattern.compile(regExpn, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(inputStr);
+
+        if (matcher.matches())
+            return true;
+        else
+            return false;
+
     }
 
     protected void StepTwo() {

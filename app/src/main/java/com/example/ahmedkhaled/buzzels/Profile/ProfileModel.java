@@ -58,7 +58,31 @@ public class ProfileModel {
                 AppController.getInstance().addToRequestQueue(stringRequest);
             }
         })
-        .observeOn(Schedulers.newThread());
+                .observeOn(Schedulers.newThread());
+    }
+
+    protected void LogOut() {
+        StringRequest stringRequest =
+                new StringRequest(Request.Method.POST, URLs.Profile,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+
+                        }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("token", AppController.getInstance().UserSession());
+                        return params;
+                    }
+                };
+        AppController.getInstance().addToRequestQueue(stringRequest);
     }
 
 }

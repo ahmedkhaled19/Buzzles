@@ -68,27 +68,6 @@ public class WishlistActivity extends FragmentActivity implements ActionBar.TabL
 
             }
         });
-        GetWish();
-    }
-
-    private void GetWish() {
-        StringRequest stringRequest =
-                new StringRequest(Request.Method.GET, URLs.User_WishList,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                Log.d("ahmeddd", response);
-
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.d("ahmeddd", error.toString());
-                            }
-
-                        });
-        AppController.getInstance().addToRequestQueue(stringRequest);
     }
 
 
