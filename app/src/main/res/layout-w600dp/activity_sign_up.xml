@@ -73,6 +73,17 @@
             android:inputType="textEmailAddress"
             android:textColor="@color/white" />
 
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="6dp"
+            android:text="Hint : password length = 8 ,contain at least one lower/uppercase and special character "
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
         <EditText
             android:id="@+id/reg_pw"
             android:layout_width="350dp"

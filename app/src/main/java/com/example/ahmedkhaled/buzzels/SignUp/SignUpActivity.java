@@ -128,7 +128,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpView {
 
     @Override
     public void errorinpasword() {
-        Toast.makeText(this, "Please check your password ", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "password is empty or not match ", Toast.LENGTH_SHORT).show();
     }
 
     @Override

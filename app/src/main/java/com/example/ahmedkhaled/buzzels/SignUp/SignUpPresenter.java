@@ -38,11 +38,6 @@ public class SignUpPresenter implements SignUpModel.VolleyCallback {
         fullname = view.getFullname();
         dob = view.getDate();
         mail = view.getEmail();
-        boolean flag = CheckMail(mail);
-        if (!flag) {
-            view.ErrorMessage("Invalid email");
-            return;
-        }
         gender = view.getGender();
         password = view.getPassword();
         cp = view.getCpassword();
@@ -54,11 +49,20 @@ public class SignUpPresenter implements SignUpModel.VolleyCallback {
             view.enterdata();
             return;
         }
-
+        boolean flag = CheckMail(mail);
+        if (!flag) {
+            view.ErrorMessage("Invalid email");
+            return;
+        }
         if (gender.equals("Male")) {
             gender = "0";
         } else {
             gender = "1";
+        }
+        boolean F = CheckPass(password);
+        if (!F) {
+            view.ErrorMessage("Invalid Password");
+            return;
         }
         if (password.equals(cp) && !password.isEmpty()) {
             String pass = HashPassword(password);
@@ -67,6 +71,19 @@ public class SignUpPresenter implements SignUpModel.VolleyCallback {
             view.errorinpasword();
             return;
         }
+    }
+
+    private boolean CheckPass(String password) {
+        Pattern pattern;
+        Matcher matcher;
+
+        String PASSWORD_PATTERN =
+                "((?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})";
+
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+        return matcher.matches();
+
     }
 
     private boolean CheckMail(String mail) {
