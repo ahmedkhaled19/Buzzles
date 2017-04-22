@@ -2,6 +2,11 @@ package com.example.ahmedkhaled.buzzels.WishlistFragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +19,16 @@ import com.example.ahmedkhaled.buzzels.Material.MaterialObject;
 import com.example.ahmedkhaled.buzzels.R;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Arrays;
 import java.util.List;
+
+import static android.R.attr.bitmap;
+import static com.example.ahmedkhaled.buzzels.R.drawable.share;
 
 /**
  * Created by seif on 3/19/2017.
@@ -39,7 +53,7 @@ public class CustAdapter extends RecyclerView.Adapter<CustAdapter.Holder> {
 
     @Override
     public void onBindViewHolder(final Holder holder, final int position) {
-        MaterialObject obj = WishData.get(position);
+        final MaterialObject obj = WishData.get(position);
 
         holder.title.setText(obj.getName());
 
@@ -52,12 +66,15 @@ public class CustAdapter extends RecyclerView.Adapter<CustAdapter.Holder> {
         holder.share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String shareBody = "is created By Buzzles.org";
+                String shareBody = WishData.get(position).getName() + " is created By Buzzles.org";
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, WishData.get(position).getName() + shareBody);
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
                 sharingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                sharingIntent.setType("image/*");
+                Uri bmpUri = presenter.getLocalBitmapUri(holder.item_image,context);
+                sharingIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
                 context.startActivity(sharingIntent);
             }
         });
@@ -66,8 +83,8 @@ public class CustAdapter extends RecyclerView.Adapter<CustAdapter.Holder> {
             @Override
             public void onClick(View view) {
                 if (WishData.get(position).is_wishlisted()) {
-                     presenter.Unwish(WishData.get(position).getId());
-                    WishData.remove(position);
+                    presenter.Unwish(WishData.get(position).getId());
+                    WishData.remove(obj);
                     notifyDataSetChanged();
                     holder.wish.setImageResource(R.drawable.unwish);
                     Toast.makeText(context, "UnWish", Toast.LENGTH_SHORT).show();

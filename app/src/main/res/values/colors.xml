@@ -5,17 +5,14 @@
     <color name="colorAccent">#FF4081</color>
     <color name="card_back">#074064</color>
     <color name="colorPrimaryLight">#c8e6c9</color>
-    <color name="log_reg_backgorund">#084164</color>
-
+    <color name="log_reg_backgorund">#228a81</color>
+    <color name="splash_background">#222222</color>
+    <color name="splash_text">#fff</color>
     <color name="not_active">#e7dfc6</color>
     <color name="tempo">#816666</color>
-
     <color name="black">#000</color>
-
     <color name="monsoon">#4a4d4a</color>
-
     <color name="aluminum">#635d63</color>
-
     <color name="white">#FFFFFF</color>
 
 </resources>

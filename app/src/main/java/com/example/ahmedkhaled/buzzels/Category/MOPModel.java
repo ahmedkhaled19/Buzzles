@@ -37,7 +37,7 @@ public class MOPModel {
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
-                                        emitter.onNext(response);
+                                       emitter.onNext(response);
                                     }
                                 },
                                 new Response.ErrorListener() {

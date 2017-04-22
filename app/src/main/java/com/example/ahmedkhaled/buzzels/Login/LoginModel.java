@@ -3,6 +3,7 @@ package com.example.ahmedkhaled.buzzels.Login;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -22,7 +23,7 @@ import java.util.Map;
 
 public class LoginModel {
 
-    protected void LogIN(final VolleyCallback callback , final String username , final String password) {
+    protected void LogIN(final VolleyCallback callback, final String username, final String password) {
         StringRequest stringRequest =
                 new StringRequest(Request.Method.POST, URLs.Login,
                         new Response.Listener<String>() {
@@ -38,7 +39,12 @@ public class LoginModel {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Log.d("ahmeddd", error.toString());
+                                NetworkResponse networkResponse = error.networkResponse;
+                                try {
+                                    callback.onSuccess(new String(networkResponse.data));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
 
                         }) {
@@ -53,11 +59,6 @@ public class LoginModel {
                 };
         AppController.getInstance().addToRequestQueue(stringRequest);
     }
-
-
-
-
-
 
 
     public interface VolleyCallback {

@@ -1,6 +1,8 @@
 package com.example.ahmedkhaled.buzzels.Profile;
 
 
+import android.util.Log;
+
 import com.example.ahmedkhaled.buzzels.Utils.AppController;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -15,6 +17,8 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.example.ahmedkhaled.buzzels.Utils.URLs.LogOut;
+
 
 /**
  * Created by AhmedKhaled on 3/21/2017.
@@ -26,6 +30,8 @@ public class ProfilePresenter {
     private ProfileModel model;
     private ProfileObject profile;
     private Observable<String> DataStream;
+    private Observable<String> Logout;
+
 
     public ProfilePresenter(ProfileView view, ProfileModel model) {
         this.view = view;
@@ -63,13 +69,27 @@ public class ProfilePresenter {
         view.StartAnalysis();
     }
 
-    public void GoToWishlist() {
+    protected void GoToWishlist() {
         view.StartWishlist();
     }
 
-    public void LogOut() {
-        model.LogOut();
-        AppController.getInstance().logout();
-        view.LogOut();
+    protected void LogOut() {
+        Logout = model.LogOut();
+        Logout.observeOn(Schedulers.io())
+                .map(new Function<String, String>() {
+                    @Override
+                    public String apply(String query) throws JSONException {
+                        AppController.getInstance().logout();
+                        return "logout";
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String profile) {
+                        view.LogOut();
+                    }
+                });
     }
+
 }

@@ -1,19 +1,18 @@
 package com.example.ahmedkhaled.buzzels.Utils;
 
 import android.app.Application;
-
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.support.v4.util.LruCache;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
-import static android.R.attr.id;
 import static com.example.ahmedkhaled.buzzels.Utils.Constants.IS_LOGGED_IN;
 import static com.example.ahmedkhaled.buzzels.Utils.Constants.SHARED_PREF_NAME;
-import static com.example.ahmedkhaled.buzzels.Utils.Constants.USERNAME;
 import static com.example.ahmedkhaled.buzzels.Utils.Constants.User_Session;
 import static com.example.ahmedkhaled.buzzels.Utils.Constants.User_Token;
 
@@ -25,12 +24,13 @@ public class AppController extends Application {
     private static AppController mInstance;
 
     private SharedPreferences sharedPreferences;
+    private ImageLoader mImageLoader;
+
 
     @Override
     public void onCreate() {
         super.onCreate();
         mInstance = this;
-
     }
 
     public static synchronized AppController getInstance() {
@@ -60,6 +60,10 @@ public class AppController extends Application {
                 }
             });
         }
+    }
+
+    public ImageLoader getImageLoader() {
+        return mImageLoader;
     }
 
     public SharedPreferences getSharedPreferences() {

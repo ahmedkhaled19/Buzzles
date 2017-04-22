@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -19,7 +20,6 @@ import java.util.Map;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.functions.Cancellable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -46,7 +46,6 @@ public class ProfileModel {
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
                                     }
-
                                 }) {
                             @Override
                             protected Map<String, String> getParams() throws AuthFailureError {
@@ -57,32 +56,36 @@ public class ProfileModel {
                         };
                 AppController.getInstance().addToRequestQueue(stringRequest);
             }
-        })
-                .observeOn(Schedulers.newThread());
+        });
     }
 
-    protected void LogOut() {
-        StringRequest stringRequest =
-                new StringRequest(Request.Method.POST, URLs.Profile,
-                        new Response.Listener<String>() {
+    protected Observable<String> LogOut() {
+        return Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(final ObservableEmitter<String> emitter) throws Exception {
+                StringRequest stringRequest =
+                        new StringRequest(Request.Method.POST, URLs.LogOut,
+                                new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        emitter.onNext(response);
+                                    }
+                                },
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                    }
+                                }) {
                             @Override
-                            public void onResponse(String response) {
+                            protected Map<String, String> getParams() throws AuthFailureError {
+                                Map<String, String> params = new HashMap<>();
+                                params.put("token", AppController.getInstance().UserSession());
+                                return params;
                             }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                            }
-
-                        }) {
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<>();
-                        params.put("token", AppController.getInstance().UserSession());
-                        return params;
-                    }
-                };
-        AppController.getInstance().addToRequestQueue(stringRequest);
+                        };
+                AppController.getInstance().addToRequestQueue(stringRequest);
+            }
+        });
     }
 
 }

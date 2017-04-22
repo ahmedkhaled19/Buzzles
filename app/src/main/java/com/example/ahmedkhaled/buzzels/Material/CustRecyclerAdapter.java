@@ -2,6 +2,7 @@ package com.example.ahmedkhaled.buzzels.Material;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -63,13 +64,17 @@ public class CustRecyclerAdapter extends RecyclerView.Adapter<CustRecyclerAdapte
         holder.share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String shareBody = "is created By Buzzles.org";
+                String shareBody = material_list.get(position).getName() + " is created By Buzzles.org";
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, material_list.get(position).getName() + shareBody);
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
                 sharingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                sharingIntent.setType("image/*");
+                Uri bmpUri = presenter.getLocalBitmapUri(holder.item_image,context);
+                sharingIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
                 context.startActivity(sharingIntent);
+
             }
         });
 
