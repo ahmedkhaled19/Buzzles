@@ -1,9 +1,12 @@
 package com.example.ahmedkhaled.buzzels.Material;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,7 +48,7 @@ public class CustRecyclerAdapter extends RecyclerView.Adapter<CustRecyclerAdapte
 
     @Override
     public void onBindViewHolder(final Holder holder, final int position) {
-        MaterialObject obj = material_list.get(position);
+        final MaterialObject obj = material_list.get(position);
 
         holder.title.setText(obj.getName());
 
@@ -64,17 +67,17 @@ public class CustRecyclerAdapter extends RecyclerView.Adapter<CustRecyclerAdapte
         holder.share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String shareBody = material_list.get(position).getName() + " is created By Buzzles.org";
-                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-                sharingIntent.setType("text/plain");
-                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, material_list.get(position).getName() + shareBody);
-                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-                sharingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                sharingIntent.setType("image/*");
-                Uri bmpUri = presenter.getLocalBitmapUri(holder.item_image,context);
-                sharingIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
-                context.startActivity(sharingIntent);
-
+                try {
+                    String shareBody = material_list.get(position).getName() + " is created By \n";
+                    Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                    sharingIntent.setType("text/plain");
+                    String sAux = "http://version2buzzles.itsgd.org/ \n";
+                    sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody + sAux);
+                    sharingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(sharingIntent);
+                } catch (Exception e) {
+                    Toast.makeText(context, "Error while sharing", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -82,34 +85,33 @@ public class CustRecyclerAdapter extends RecyclerView.Adapter<CustRecyclerAdapte
             @Override
             public void onClick(View view) {
                 if (material_list.get(position).is_wishlisted()) {
-                    boolean aBoolean = presenter.Unwish(material_list.get(position).getId());
                     material_list.get(position).set_wishlisted(false);
+                    presenter.Unwish(material_list.get(position).getId());
                     holder.wish.setImageResource(R.drawable.unwish);
                     Toast.makeText(context, "UnWish", Toast.LENGTH_SHORT).show();
                 } else {
-                    boolean aBoolean = presenter.Wish(material_list.get(position).getId());
                     material_list.get(position).set_wishlisted(true);
                     holder.wish.setImageResource(R.drawable.wish);
+                    presenter.Wish(material_list.get(position).getId());
                     Toast.makeText(context, "Wish", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
 
-        holder.like.setOnClickListener(new View.OnClickListener()
-        {
+        holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (material_list.get(position).is_liked()) {
-                    boolean aBoolean = presenter.Unlike(material_list.get(position).getId());
                     holder.like.setImageResource(R.drawable.unlike);
                     material_list.get(position).set_liked(false);
+                    presenter.Unlike(material_list.get(position).getId());
                     Toast.makeText(context, "Unlike", Toast.LENGTH_SHORT).show();
 
                 } else {
-                    boolean aBoolean = presenter.Like(material_list.get(position).getId());
                     holder.like.setImageResource(R.drawable.liked);
                     material_list.get(position).set_liked(true);
+                    presenter.Like(material_list.get(position).getId());
                     Toast.makeText(context, "Like", Toast.LENGTH_SHORT).show();
 
                 }
@@ -120,6 +122,13 @@ public class CustRecyclerAdapter extends RecyclerView.Adapter<CustRecyclerAdapte
                 load(obj.getImg_url()).
 
                 into(holder.item_image);
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                build_dialoge(obj.getImg_url());
+            }
+        });
     }
 
     @Override
@@ -127,12 +136,27 @@ public class CustRecyclerAdapter extends RecyclerView.Adapter<CustRecyclerAdapte
         return material_list.size();
     }
 
+
+    private void build_dialoge(String image_url) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        View dialogView = inflater.inflate(R.layout.dialog_material_item, null);
+        builder.setView(dialogView);
+        final ImageView imageView = (ImageView) dialogView.findViewById(R.id.image_dialog);
+        Picasso.with(context).load(image_url).into(imageView);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+
     public class Holder extends RecyclerView.ViewHolder {
         ImageView item_image, like, share, wish;
         TextView title;
+        CardView cardView;
 
         public Holder(View itemView) {
             super(itemView);
+            cardView = (CardView) itemView.findViewById(R.id.card_main);
             item_image = (ImageView) itemView.findViewById(R.id.item_img);
             like = (ImageView) itemView.findViewById(R.id.like_icon);
             share = (ImageView) itemView.findViewById(R.id.share_icon);

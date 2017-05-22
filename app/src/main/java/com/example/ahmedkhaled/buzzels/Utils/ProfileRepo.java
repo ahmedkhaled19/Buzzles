@@ -28,7 +28,6 @@ public class ProfileRepo {
 
         RequestBody requestPic = RequestBody.create(MediaType.parse("image/*"), file);
 
-       // MultipartBody.Part step = MultipartBody.Part.createFormData("step", "3");
         MultipartBody.Part profilePic = MultipartBody.Part.createFormData("profile_pic", file.getName(), requestPic);
         MultipartBody.Part token = MultipartBody.Part.createFormData("token", userKey);
 

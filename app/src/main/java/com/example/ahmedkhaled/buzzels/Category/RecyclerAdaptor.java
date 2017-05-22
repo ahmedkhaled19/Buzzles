@@ -52,7 +52,7 @@ public class RecyclerAdaptor extends RecyclerView.Adapter<RecyclerAdaptor.Holder
 
             @Override
             public void onError() {
-                Toast.makeText(context, "ma3lesh 7a2ak 3alaya", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "error in download", Toast.LENGTH_SHORT).show();
             }
         });
 

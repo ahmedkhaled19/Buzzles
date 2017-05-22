@@ -99,37 +99,9 @@ public class WishListPresenter {
                 .subscribe(new Consumer<Boolean>() {
                     @Override
                     public void accept(Boolean flage) throws Exception {
-                        Log.d("ahmeddd", String.valueOf(flage));
                     }
                 });
 
     }
 
-    public Uri getLocalBitmapUri(ImageView item_image, Context context) {
-        Drawable drawable = item_image.getDrawable();
-        Bitmap bmp = null;
-        if (drawable instanceof BitmapDrawable) {
-            bmp = ((BitmapDrawable) item_image.getDrawable()).getBitmap();
-        } else {
-            return null;
-        }
-        // Store image to default external storage directory
-        Uri bmpUri = null;
-        try {
-            // Use methods on Context to access package-specific directories on external storage.
-            // This way, you don't need to request external read/write permission.
-            // See https://youtu.be/5xVh-7ywKpE?t=25m25s
-            File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
-            FileOutputStream out = new FileOutputStream(file);
-            bmpUri = FileProvider.getUriForFile(context, "com.codepath.fileprovider", file);
-
-            bmp.compress(Bitmap.CompressFormat.JPEG, 100, out);
-            out.close();
-            // **Warning:** This will fail for API >= 24, use a FileProvider as shown below instead.
-            bmpUri = Uri.fromFile(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bmpUri;
-    }
 }

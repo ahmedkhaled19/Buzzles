@@ -4,13 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@color/log_reg_backgorund"
+    android:background="@drawable/back"
     tools:context="com.example.ahmedkhaled.buzzels.SignUp.SignUpActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
         android:gravity="center"
         android:orientation="vertical"
         android:weightSum="1">
@@ -22,56 +24,78 @@
             android:fontFamily="cursive"
             android:gravity="center"
             android:text="Buzzles"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="80dp" />
 
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/reg_pic"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/avatar"
             android:onClick="ChossePhoto"
-            android:src="@drawable/avatar" />
+            app:civ_border_color="#FFF"
+            app:civ_border_width="2dp" />
 
-        <EditText
-            android:id="@+id/reg_Uname"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="6dp"
-            android:fontFamily="sans-serif"
-            android:hint="User Name"
-            android:inputType="text"
             android:textColor="@color/white"
-            android:textSize="17sp" />
+            android:textColorHint="@color/white">
 
-        <EditText
-            android:id="@+id/reg_Fname"
+            <EditText
+                android:id="@+id/reg_Uname"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:hint="User Name"
+                android:inputType="text"
+                android:textSize="17sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="6dp"
-            android:fontFamily="sans-serif"
-            android:hint="Full Name"
-            android:inputType="text"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textColorHint="@color/white">
 
-        <EditText
-            android:id="@+id/reg_email"
+            <EditText
+                android:id="@+id/reg_Fname"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:hint="Full Name"
+                android:textColor="@color/white" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="6dp"
-            android:fontFamily="sans-serif"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textColorHint="@color/white">
+
+            <EditText
+                android:id="@+id/reg_email"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
+        </android.support.design.widget.TextInputLayout>
 
         <TextView
             android:layout_width="350dp"
@@ -84,31 +108,43 @@
             android:textColor="@color/white"
             android:textSize="15sp" />
 
-        <EditText
-            android:id="@+id/reg_pw"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="6dp"
-            android:fontFamily="sans-serif"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textColorHint="@color/white">
 
-        <EditText
-            android:id="@+id/reg_cpw"
+            <EditText
+                android:id="@+id/reg_pw"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:hint="Password"
+                android:inputType="textPassword" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="6dp"
-            android:fontFamily="sans-serif"
-            android:hint="Confirm Password"
-            android:inputType="textPassword"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textColorHint="@color/white">
+
+            <EditText
+                android:id="@+id/reg_cpw"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:hint="Confirm Password"
+                android:inputType="textPassword" />
+        </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -163,32 +199,23 @@
             android:layout_marginTop="12dp"
             android:orientation="horizontal">
 
-            <TextView
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/gender"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="0dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="60dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="12dp"
-                android:text="Date of birth :"
+                android:hint="Date of birth "
+                android:onClick="ChooseDate"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textColorHint="@color/white"
+                android:textSize="17dp"
                 android:textStyle="bold" />
 
-            <com.example.ahmedkhaled.buzzels.SignUp.CustomDatePicker
-                android:id="@+id/calendar"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.30"
-                android:background="@color/aluminum"
-                android:calendarViewShown="false"
-                android:datePickerMode="spinner"
-                android:endYear="2010"
-                android:maxDate="1//1//2010"
-                android:minDate="1//1//1960"
-                android:startYear="1960" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -213,8 +240,7 @@
                 android:id="@+id/Country_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/white" />
+                android:layout_weight="1" />
 
 
         </LinearLayout>
@@ -241,9 +267,7 @@
                 android:id="@+id/joptitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/white"
-               />
+                android:layout_weight="1" />
 
 
         </LinearLayout>
@@ -256,6 +280,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="12dp"
+            android:background="@drawable/shap"
             android:onClick="SignUp"
             android:text="Sign up"
             android:textAllCaps="false"

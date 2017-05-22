@@ -40,7 +40,7 @@ public class PicFragment extends android.support.v4.app.Fragment implements Wish
 
     @Override
     public void PutData(List<MaterialObject> data) {
-        adapter = new CustAdapter(getApplicationContext(), data, presenter);
+        adapter = new CustAdapter(getActivity(), data, presenter);
         manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);

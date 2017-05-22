@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/profilepicbackground">
+    android:background="@drawable/bg2">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,8 +19,7 @@
             android:gravity="left"
             android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/profileimage"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
@@ -35,11 +34,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true" />
+
             <LinearLayout
-                android:layout_marginBottom="16dp"
-                android:layout_below="@id/profileimage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_below="@id/profileimage"
+                android:layout_marginBottom="16dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="25dp"
                     android:textStyle="bold|italic" />
 
@@ -58,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 

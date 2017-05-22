@@ -1,6 +1,7 @@
 package com.example.ahmedkhaled.buzzels.Login;
 
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     EditText username;
     EditText password;
     LoginPresenter presenter;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         regTxt = (TextView) findViewById(R.id.reg_txt);
         username = (EditText) findViewById(R.id.log_email);
         password = (EditText) findViewById(R.id.log_pw);
+        dialog = new ProgressDialog(this);
         presenter = new LoginPresenter(this, new LoginModel());
         presenter.CheckLoged();
         regTxt.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +57,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     public void Login(View view) {
+        dialog = ProgressDialog.show(LoginActivity.this, "",
+                "Logging in ...", true);
+        dialog.show();
         presenter.Login();
     }
 
@@ -70,6 +76,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void ErrorMassage(String s) {
+        dialog.dismiss();
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 

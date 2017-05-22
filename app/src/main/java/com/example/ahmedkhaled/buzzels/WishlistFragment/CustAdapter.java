@@ -66,16 +66,17 @@ public class CustAdapter extends RecyclerView.Adapter<CustAdapter.Holder> {
         holder.share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String shareBody = WishData.get(position).getName() + " is created By Buzzles.org";
-                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-                sharingIntent.setType("text/plain");
-                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, WishData.get(position).getName() + shareBody);
-                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-                sharingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                sharingIntent.setType("image/*");
-                Uri bmpUri = presenter.getLocalBitmapUri(holder.item_image,context);
-                sharingIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
-                context.startActivity(sharingIntent);
+                try {
+                    String shareBody = WishData.get(position).getName() + " is created By \n";
+                    Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                    sharingIntent.setType("text/plain");
+                    String sAux = "http://version2buzzles.itsgd.org/ \n";
+                    sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody + sAux);
+                    sharingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(sharingIntent);
+                } catch (Exception e) {
+                    Toast.makeText(context, "Error while sharing", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

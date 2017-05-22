@@ -72,7 +72,6 @@ public class MaterialModel {
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
-                                        Log.d("ahmeddd", response);
                                         emitter.onNext(response);
                                     }
                                 },

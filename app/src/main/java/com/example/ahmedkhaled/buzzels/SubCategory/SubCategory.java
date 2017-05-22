@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ public class SubCategory extends AppCompatActivity implements SubCategoryView {
     private SubCategoryPresenter presenter;
     private RecyclerAdaptor adaptor;
     private Intent intent;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,8 @@ public class SubCategory extends AppCompatActivity implements SubCategoryView {
         dotsLayout = (LinearLayout) findViewById(R.id.layout4);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_subcategory);
         intent = getIntent();
+        textView = (TextView) findViewById(R.id.hit_text_sub);
+        textView.setVisibility(View.INVISIBLE);
         presenter = new SubCategoryPresenter(new SubCategoryModel(), this);
         presenter.GetData(intent.getStringExtra("id"));
 
@@ -48,11 +52,15 @@ public class SubCategory extends AppCompatActivity implements SubCategoryView {
 
     @Override
     public void SetData(List<SubObject> data) {
-        adaptor = new RecyclerAdaptor(data, getApplicationContext());
-        manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(adaptor);
-
+        if (!data.isEmpty()) {
+            textView.setVisibility(View.INVISIBLE);
+            adaptor = new RecyclerAdaptor(data, getApplicationContext());
+            manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+            recyclerView.setLayoutManager(manager);
+            recyclerView.setAdapter(adaptor);
+        }else {
+            textView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

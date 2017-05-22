@@ -86,6 +86,7 @@ public class Profile extends Fragment implements ProfileView {
         });
     }
 
+
     @Override
     public void StartAnalysis() {
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#bdb284</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#311b92</color>
+    <color name="colorPrimaryDark">#1a237e</color>
+    <color name="colorAccent">#37a9b3</color>
     <color name="card_back">#074064</color>
     <color name="colorPrimaryLight">#c8e6c9</color>
     <color name="log_reg_backgorund">#228a81</color>
@@ -14,5 +14,6 @@
     <color name="monsoon">#4a4d4a</color>
     <color name="aluminum">#635d63</color>
     <color name="white">#FFFFFF</color>
+    <color name="ButtonBack">#919499</color>
 
 </resources>
