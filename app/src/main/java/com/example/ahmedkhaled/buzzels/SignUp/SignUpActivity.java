@@ -1,6 +1,7 @@
 package com.example.ahmedkhaled.buzzels.SignUp;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.provider.DocumentsContract;
@@ -9,12 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ahmedkhaled.buzzels.MainActivity;
@@ -31,7 +34,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SignUpActivity extends AppCompatActivity implements SignUpView, DatePickerDialog.OnDateSetListener {
 
     private Spinner JobSpinner, CountrySpinner;
-    private EditText username, fullname, email, password, confirmpassword, date;
+    private EditText username, fullname, email, password, confirmpassword;
+    private TextView date;
     private CircleImageView image;
     private RadioGroup ganeder;
     private RadioButton gselected;
@@ -49,7 +53,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpView, Dat
         email = (EditText) findViewById(R.id.reg_email);
         password = (EditText) findViewById(R.id.reg_pw);
         confirmpassword = (EditText) findViewById(R.id.reg_cpw);
-        date = (EditText) findViewById(R.id.dateofbirth);
+        date = (TextView) findViewById(R.id.dateofbirth);
         ganeder = (RadioGroup) findViewById(R.id.radio_choose);
         JobSpinner = (Spinner) findViewById(R.id.joptitle);
         CountrySpinner = (Spinner) findViewById(R.id.Country_title);
@@ -79,7 +83,6 @@ public class SignUpActivity extends AppCompatActivity implements SignUpView, Dat
 
             }
         });
-
     }
 
 
@@ -250,6 +253,11 @@ public class SignUpActivity extends AppCompatActivity implements SignUpView, Dat
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         DOB = sdf.format(c.getTime());
         date.setText(DOB);
+    }
+
+    public void CloseFocus(View view) {
+        InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getApplicationWindowToken(), 0);
     }
 }
 

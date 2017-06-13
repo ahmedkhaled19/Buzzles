@@ -9,7 +9,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.R.attr.data;
+import static android.R.attr.id;
 import static com.ss.bottomnavigation.utils.Util.dpToPx;
 
 /**
@@ -44,17 +47,23 @@ public class Collection extends Fragment implements CollectionView {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_collection);
         presenter = new CollectionPresenter(this, new CollectionModel());
         presenter.GetCollection();
+        SnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(recyclerView);
         return view;
     }
 
     @Override
     public void SetData(List<MOPobject> data) {
-        adaptor = new CollectionAdaptor(data, getActivity(), presenter);
-        manager = new GridLayoutManager(getContext(), 2);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adaptor);
+        if (isAdded()) {
+            adaptor = new CollectionAdaptor(data, getActivity(), presenter);
+            manager = new GridLayoutManager(getContext(), 2);
+            recyclerView.setLayoutManager(manager);
+            recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(adaptor);
+        } else {
+            SetData(data);
+        }
     }
 
     @Override
@@ -62,6 +71,11 @@ public class Collection extends Fragment implements CollectionView {
         startActivity(new Intent(getActivity(), MaterialActivity.class)
                 .putExtra("id", id)
                 .putExtra("from", 3));
+    }
+
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
@@ -97,9 +111,5 @@ public class Collection extends Fragment implements CollectionView {
                 }
             }
         }
-    }
-    private int dpToPx(int dp) {
-        Resources r = getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 }

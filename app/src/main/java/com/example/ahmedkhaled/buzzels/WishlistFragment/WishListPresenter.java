@@ -79,7 +79,7 @@ public class WishListPresenter {
                 });
     }
 
-    public void Unwish(String id) {
+    protected void Unwish(String id) {
         Observable<String> Like = model.UnWishlist(id);
         Like.observeOn(Schedulers.computation())
                 .map(new Function<String, Boolean>() {

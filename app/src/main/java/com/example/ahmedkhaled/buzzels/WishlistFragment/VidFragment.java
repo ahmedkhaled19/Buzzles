@@ -35,7 +35,7 @@ public class VidFragment extends android.support.v4.app.Fragment implements Wish
         view = inflater.inflate(R.layout.activity_video_pic, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_wish);
         presenter = new WishListPresenter(this, new WishListModel());
-        presenter.GetWIsh();
+//      presenter.GetWIsh();
 
         return view;
     }

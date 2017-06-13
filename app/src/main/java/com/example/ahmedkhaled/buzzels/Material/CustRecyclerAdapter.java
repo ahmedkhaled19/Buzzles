@@ -88,12 +88,12 @@ public class CustRecyclerAdapter extends RecyclerView.Adapter<CustRecyclerAdapte
                     material_list.get(position).set_wishlisted(false);
                     presenter.Unwish(material_list.get(position).getId());
                     holder.wish.setImageResource(R.drawable.unwish);
-                    Toast.makeText(context, "UnWish", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Remove from WishList", Toast.LENGTH_SHORT).show();
                 } else {
                     material_list.get(position).set_wishlisted(true);
                     holder.wish.setImageResource(R.drawable.wish);
                     presenter.Wish(material_list.get(position).getId());
-                    Toast.makeText(context, "Wish", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Add to WishList", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -106,13 +106,13 @@ public class CustRecyclerAdapter extends RecyclerView.Adapter<CustRecyclerAdapte
                     holder.like.setImageResource(R.drawable.unlike);
                     material_list.get(position).set_liked(false);
                     presenter.Unlike(material_list.get(position).getId());
-                    Toast.makeText(context, "Unlike", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "UnLiked", Toast.LENGTH_SHORT).show();
 
                 } else {
                     holder.like.setImageResource(R.drawable.liked);
                     material_list.get(position).set_liked(true);
                     presenter.Like(material_list.get(position).getId());
-                    Toast.makeText(context, "Like", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Liked", Toast.LENGTH_SHORT).show();
 
                 }
             }

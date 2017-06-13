@@ -1,26 +1,19 @@
 package com.example.ahmedkhaled.buzzels.WishlistFragment;
 
+import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.app.ActionBar;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
+import android.widget.Toolbar;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.example.ahmedkhaled.buzzels.R;
-import com.example.ahmedkhaled.buzzels.Utils.AppController;
-import com.example.ahmedkhaled.buzzels.Utils.URLs;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class WishlistActivity extends FragmentActivity implements ActionBar.TabListener {
+
     private ViewPager viewPager;
     private ActionBar actionBar;
     private CustFragmentPagerAdapter custFragmentPagerAdapter;
@@ -41,7 +34,11 @@ public class WishlistActivity extends FragmentActivity implements ActionBar.TabL
         actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         actionBar.setDisplayHomeAsUpEnabled(false);
-
+        actionBar.setTitle("");
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setCustomView(R.layout.wishlist_logo);
+        actionBar.setStackedBackgroundDrawable(
+                new ColorDrawable(Color.parseColor("#311b92")));
         /*
          * Set data on Action Bar
          */

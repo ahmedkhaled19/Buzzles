@@ -1,8 +1,6 @@
 package com.example.ahmedkhaled.buzzels.WishlistFragment;
 
 
-import android.util.Log;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -47,7 +45,7 @@ public class WishListModel {
         });
     }
 
-    public Observable<String> UnWishlist(final String id) {
+    protected Observable<String> UnWishlist(final String id) {
         return Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(final ObservableEmitter<String> emitter) throws Exception {

@@ -45,40 +45,42 @@
             android:padding="@dimen/card_button_margin">
 
             <ImageView
-                android:id="@+id/share_icon"
+                android:id="@+id/like_icon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_marginRight="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:padding="8dp"
-                android:src="@drawable/share" />
+                android:src="@drawable/liked" />
+
 
             <ImageView
                 android:id="@+id/wishlist_icon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginRight="8dp"
-                android:layout_toLeftOf="@id/share_icon"
-                android:layout_toStartOf="@id/share_icon"
+                android:layout_toEndOf="@id/like_icon"
+                android:layout_toRightOf="@id/like_icon"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:padding="8dp"
                 android:src="@drawable/wish" />
 
             <ImageView
-                android:id="@+id/like_icon"
+                android:id="@+id/share_icon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginRight="8dp"
-                android:layout_toLeftOf="@id/wishlist_icon"
-                android:layout_toStartOf="@id/wishlist_icon"
+                android:layout_toEndOf="@id/wishlist_icon"
+                android:layout_toRightOf="@id/wishlist_icon"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:padding="8dp"
-                android:src="@drawable/liked" />
+                android:src="@drawable/share" />
+
 
         </RelativeLayout>
 

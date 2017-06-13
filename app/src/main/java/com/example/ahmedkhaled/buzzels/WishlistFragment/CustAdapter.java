@@ -1,5 +1,6 @@
 package com.example.ahmedkhaled.buzzels.WishlistFragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -7,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,7 +90,7 @@ public class CustAdapter extends RecyclerView.Adapter<CustAdapter.Holder> {
                     WishData.remove(obj);
                     notifyDataSetChanged();
                     holder.wish.setImageResource(R.drawable.unwish);
-                    Toast.makeText(context, "UnWish", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Remove from WishList", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -98,6 +100,22 @@ public class CustAdapter extends RecyclerView.Adapter<CustAdapter.Holder> {
                 load(obj.getImg_url()).
 
                 into(holder.item_image);
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                build_dialoge(obj.getImg_url());
+            }
+        });
+    }
+    private void build_dialoge(String image_url) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        View dialogView = inflater.inflate(R.layout.dialog_material_item, null);
+        builder.setView(dialogView);
+        final ImageView imageView = (ImageView) dialogView.findViewById(R.id.image_dialog);
+        Picasso.with(context).load(image_url).into(imageView);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     @Override
@@ -108,9 +126,10 @@ public class CustAdapter extends RecyclerView.Adapter<CustAdapter.Holder> {
     public class Holder extends RecyclerView.ViewHolder {
         ImageView item_image, share, wish;
         TextView title;
-
+        CardView cardView;
         public Holder(View itemView) {
             super(itemView);
+            cardView = (CardView) itemView.findViewById(R.id.card_wish);
             item_image = (ImageView) itemView.findViewById(R.id.wish_item_img);
             share = (ImageView) itemView.findViewById(R.id.wish_share_icon);
             wish = (ImageView) itemView.findViewById(R.id.wish_wishlist_icon);
